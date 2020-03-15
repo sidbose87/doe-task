@@ -40,16 +40,61 @@ if [ -d &quot;$DIR&quot;]; then
 fi
 
 
-1. echo &quot;checking hostname&quot;
-logic here
-2. echo &quot;checking os&quot;
-logic here
-3. echo &quot;checking os type or version and print&quot;
+echo &apos;#!/bin/bash&apos; &gt; trigger_prereq.sh
+echo &apos;if [ -f /etc/os-release ]; then&apos; &gt;&gt; trigger_prereq.sh
+echo &apos;    . /etc/os-release&apos; &gt;&gt; trigger_prereq.sh
+echo &apos;    OS=$NAME&apos; &gt;&gt; trigger_prereq.sh
+echo &apos;    VER=$VERSION_ID&apos; &gt;&gt; trigger_prereq.sh
+echo &apos;elif type lsb_release &gt;/dev/null 2&gt;&amp;1; then&apos; &gt;&gt; trigger_prereq.sh
+echo &apos;    OS=$(lsb_release -si)&apos; &gt;&gt; trigger_prereq.sh
+echo &apos;    VER=$(lsb_release -sr)&apos; &gt;&gt; trigger_prereq.sh
+echo &apos;elif [ -f /etc/lsb-release ]; then&apos; &gt;&gt; trigger_prereq.sh
+echo &apos;    . /etc/lsb-release&apos; &gt;&gt; trigger_prereq.sh
+echo &apos;    OS=$DISTRIB_ID&apos; &gt;&gt; trigger_prereq.sh
+echo &apos;    VER=$DISTRIB_RELEASE&apos; &gt;&gt; trigger_prereq.sh
+echo &apos;elif [ -f /etc/debian_version ]; then&apos; &gt;&gt; trigger_prereq.sh
+echo &apos;    OS=Debian&apos; &gt;&gt; trigger_prereq.sh
+echo &apos;    VER=$(cat /etc/debian_version)&apos; &gt;&gt; trigger_prereq.sh
+echo &apos;elif [ -f /etc/redhat-release ]; then&apos; &gt;&gt; trigger_prereq.sh
+echo &apos;    OS=RedHat&apos; &gt;&gt; trigger_prereq.sh
+echo &apos;    VER=$(cat /etc/redhat-release)&apos; &gt;&gt; trigger_prereq.sh
+echo &apos;else&apos; &gt;&gt; trigger_prereq.sh
+echo &apos;    # For all other versions&apos; &gt;&gt; trigger_prereq.sh
+echo &apos;    OS=$(uname -s)&apos; &gt;&gt; trigger_prereq.sh
+echo &apos;    VER=$(uname -r)&apos; &gt;&gt; trigger_prereq.sh
+echo &apos;fi&apos; &gt;&gt; trigger_prereq.sh
 
+echo &apos;case $(uname -m) in&apos; &gt;&gt; trigger_prereq.sh
+echo &apos;x86_64)&apos; &gt;&gt; trigger_prereq.sh
+echo &apos;    BITS=64&apos; &gt;&gt; trigger_prereq.sh
+echo &apos;    ;;&apos; &gt;&gt; trigger_prereq.sh
+echo &apos;i*86)&apos; &gt;&gt; trigger_prereq.sh
+echo &apos;    BITS=32&apos; &gt;&gt; trigger_prereq.sh
+echo &apos;    ;;&apos; &gt;&gt; trigger_prereq.sh
+echo &apos;*)&apos; &gt;&gt; trigger_prereq.sh
+echo &apos;    BITS=?&apos; &gt;&gt; trigger_prereq.sh
+echo &apos;    ;;&apos; &gt;&gt; trigger_prereq.sh
+echo &apos;esac&apos; &gt;&gt; trigger_prereq.sh
 
+echo &apos;echo &quot;OS, VERSION, BIT-VERSION&quot; &gt; /tmp/details.csv&apos; &gt;&gt; trigger_prereq.sh
+echo &apos;echo &quot;$OS, $VER, $BITS&quot; &gt;&gt; /tmp/details.csv&apos; &gt;&gt; trigger_prereq.sh
+
+./trigger_prereq.sh
+
+cat /tmp/details.csv
 </command>
     </hudson.tasks.Shell>
   </builders>
-  <publishers/>
+  <publishers>
+    <hudson.tasks.BuildTrigger>
+      <childProjects>linux/doe-pr02</childProjects>
+      <threshold>
+        <name>SUCCESS</name>
+        <ordinal>0</ordinal>
+        <color>BLUE</color>
+        <completeBuild>true</completeBuild>
+      </threshold>
+    </hudson.tasks.BuildTrigger>
+  </publishers>
   <buildWrappers/>
 </project>
