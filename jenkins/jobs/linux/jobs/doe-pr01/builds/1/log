@@ -1,0 +1,42 @@
+Started by user [8mha:////4JSZcmKVxxy2+2NrwAb+lj1ReIAOzPEU2wPXAFS4wwNiAAAAlR+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAz+EgZO/dLi1CL94swUAO1XDqK+AAAA[0mSiddhartha Bose
+Running as SYSTEM
+Building in workspace /var/lib/jenkins/workspace/doe-pr01
+[doe-pr01] $ /bin/sh -xe /tmp/jenkins16642034991757470276.sh
++ cd /tmp
++ ls -lah
+total 2.4M
+drwxrwxrwt 19 root    root    4.0K Mar 15 06:44 .
+drwxr-xr-x 20 root    root    4.0K Mar 15 05:31 ..
+-rw-------  1 osboxes osboxes    0 Mar 15 04:58 config-err-xUiJbO
+drwxrwxrwt  2 root    root    4.0K Mar 15 04:57 .font-unix
+drwxr-xr-x  2 jenkins jenkins 4.0K Mar 15 05:18 hsperfdata_jenkins
+drwxr-xr-x  2 root    root    4.0K Mar 15 05:37 hsperfdata_root
+drwxrwxrwt  2 root    root    4.0K Mar 15 04:58 .ICE-unix
+-rw-r--r--  1 jenkins jenkins  229 Mar 15 06:44 jenkins16642034991757470276.sh
+drwxr-xr-x  2 jenkins jenkins 4.0K Mar 15 05:18 jetty-0.0.0.0-8080-war-_-any-15119989880346607214.dir
+drwx------  2 osboxes osboxes 4.0K Mar 15 04:58 ssh-QCjuSOqxtIA5
+drwx------  3 root    root    4.0K Mar 15 05:01 systemd-private-60a38dbd42194e568b824b025a1240c6-bolt.service-U27MAv
+drwx------  3 root    root    4.0K Mar 15 04:58 systemd-private-60a38dbd42194e568b824b025a1240c6-colord.service-apV8oG
+drwx------  3 root    root    4.0K Mar 15 05:01 systemd-private-60a38dbd42194e568b824b025a1240c6-fwupd.service-pyePEP
+drwx------  3 root    root    4.0K Mar 15 04:57 systemd-private-60a38dbd42194e568b824b025a1240c6-ModemManager.service-fjV08N
+drwx------  3 root    root    4.0K Mar 15 05:39 systemd-private-60a38dbd42194e568b824b025a1240c6-systemd-resolved.service-7GWlgg
+drwx------  3 root    root    4.0K Mar 15 05:39 systemd-private-60a38dbd42194e568b824b025a1240c6-systemd-timesyncd.service-fJ5Otp
+drwx------  3 root    root    4.0K Mar 15 04:58 systemd-private-60a38dbd42194e568b824b025a1240c6-upower.service-R2fxiq
+drwxrwxrwt  2 root    root    4.0K Mar 15 04:57 .Test-unix
+drwx------  2 osboxes osboxes 4.0K Mar 15 05:01 tracker-extract-files.1000
+-rw-r--r--  1 jenkins jenkins 2.3M Mar 15 05:18 winstone3191329106832037831.jar
+-r--r--r--  1 gdm     gdm       11 Mar 15 04:57 .X1024-lock
+drwxrwxrwt  2 root    root    4.0K Mar 15 04:58 .X11-unix
+drwxrwxrwt  2 root    root    4.0K Mar 15 04:57 .XIM-unix
++ DIR=/tmp/doe-task
++ [ -d /tmp/doe-task]
+/tmp/jenkins16642034991757470276.sh: 5: [: missing ]
++ git clone git@github.com:sidbose87/doe-task.git
+Cloning into 'doe-task'...
+Host key verification failed.
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+Build step 'Execute shell' marked build as failure
+Finished: FAILURE
