@@ -1,0 +1,28 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties/>
+  <scm class="hudson.scm.NullSCM"/>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.BatchFile>
+      <command>echo ^:loop &gt; hostname-date.bat&#xd;
+echo FOR ^/F ^&quot;tokens=* USEBACKQ^&quot; ^%^%F IN ^(^`hostname^`^) DO ^(SET host=^%^%F^) &gt;&gt; hostname-date.bat&#xd;
+echo FOR ^/F ^&quot;tokens=* USEBACKQ^&quot; ^%^%F IN ^(^`echo %date:~4,2%-%date:~7,2%-%date:~10,4%^`^) DO ^(SET cur-date=^%^%F^) &gt;&gt; hostname-date.bat&#xd;
+echo echo ^%host^% ^%cur-date^% ^&gt; test1-hostname.txt &gt;&gt; hostname-date.bat&#xd;
+echo timeout ^/t 10 &gt;&gt; hostname-date.bat&#xd;
+echo goto loop &gt;&gt; hostname-date.bat&#xd;
+&#xd;
+sc create &quot;ServiceName&quot; start= demand displayname= &quot;Hostname-Date&quot; binpath= [hostname-date.bat]</command>
+    </hudson.tasks.BatchFile>
+  </builders>
+  <publishers/>
+  <buildWrappers/>
+</project>
