@@ -15,17 +15,12 @@ You need to copy the contents of .ssh folder of pre-req in order for your local 
 Copy contents of jenkins/jobs folder to your local jenkins master.
 
 Or use
-    1. Configurator.bat (For windows to set up your environment by moving files from this repo)
-    2. Configurator.sh (For linux to set up your environment by moving files from this repo)
+1. Configurator.bat (For windows to set up your environment by moving files from this repo)
+2. Configurator.sh (For linux to set up your environment by moving files from this repo)
 
-Deployment
+## Deployment
 
-Add additional notes about how to deploy this on a live system
-Built With
-
-    Dropwizard - The web framework used
-    Maven - Dependency Management
-    ROME - Used to generate RSS Feeds
+Trigger doe-pr01 which will in turn trigger consecutive job.
 
 ## Authors
 
