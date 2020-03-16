@@ -77,15 +77,15 @@ cat /tmp/os_details.csv
 echo &quot;# Below commands needs to be executed with sudo permissions to create a named user, for script to run in next phase.&quot;
 
 sudo useradd -m log-user 2&gt;/tmp/jenkins-error || true
-sudo mkdir /home/log-user/jenkins-scripts 2&gt;/tmp/jenkins-error || true
-sudo chmod -R o+rx /home/log-user/ 2&gt;/tmp/jenkins-error || true
-sudo chmod -R o+wx /home/log-user/jenkins-scripts/ 2&gt;/tmp/jenkins-error || true
+sudo mkdir /home/log-user/jenkins-scripts 2&gt;&gt;/tmp/jenkins-error || true
+sudo chmod -R o+rx /home/log-user/ 2&gt;&gt;/tmp/jenkins-error || true
+sudo chmod -R o+wx /home/log-user/jenkins-scripts/ 2&gt;&gt;/tmp/jenkins-error || true
 
 echo &quot;# Below command prepares for letting log-user run the next script as a service or daemon.&quot;
 
-sudo mkdir -p /home/log-user/.config/systemd/log-user/ 2&gt;/tmp/jenkins-error || true
-sudo chmod -R o+rx /home/log-user/.config/systemd/ 2&gt;/tmp/jenkins-error || true
-sudo chmod -R o+wx /home/log-user/.config/systemd/log-user/ 2&gt;/tmp/jenkins-error || true
+sudo mkdir -p /home/log-user/.config/systemd/log-user/ 2&gt;&gt;/tmp/jenkins-error || true
+sudo chmod -R o+rx /home/log-user/.config/systemd/ 2&gt;&gt;/tmp/jenkins-error || true
+sudo chmod -R o+wx /home/log-user/.config/systemd/log-user/ 2&gt;&gt;/tmp/jenkins-error || true
 </command>
     </hudson.tasks.Shell>
   </builders>

@@ -4,22 +4,7 @@
   <description></description>
   <keepDependencies>false</keepDependencies>
   <properties/>
-  <scm class="hudson.plugins.git.GitSCM" plugin="git@4.0.0">
-    <configVersion>2</configVersion>
-    <userRemoteConfigs>
-      <hudson.plugins.git.UserRemoteConfig>
-        <url>git@github.com:sidbose87/doe-task.git</url>
-      </hudson.plugins.git.UserRemoteConfig>
-    </userRemoteConfigs>
-    <branches>
-      <hudson.plugins.git.BranchSpec>
-        <name>*/master</name>
-      </hudson.plugins.git.BranchSpec>
-    </branches>
-    <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
-    <submoduleCfg class="list"/>
-    <extensions/>
-  </scm>
+  <scm class="hudson.scm.NullSCM"/>
   <canRoam>true</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
@@ -37,21 +22,24 @@ chmod 755 /home/log-user/jenkins-scripts/hostname-date.sh
 
 
 
-echo &apos;[Unit]&apos; &gt; /home/log-user/.config/systemd/log-user/hostname-date.service
-echo &apos;Description=Hostname-Date-Task&apos; &gt;&gt; /home/log-user/.config/systemd/log-user/hostname-date.service
-echo &apos;&apos; &gt;&gt; /home/log-user/.config/systemd/log-user/hostname-date.service
-echo &apos;[Service]&apos; &gt;&gt; /home/log-user/.config/systemd/log-user/hostname-date.service
-echo &apos;Type=notify&apos; &gt;&gt; /home/log-user/.config/systemd/log-user/hostname-date.service
-echo &apos;ExecStart=/home/log-user/jenkins-scripts/hostname-date.sh&apos; &gt;&gt; /home/log-user/.config/systemd/log-user/hostname-date.service
-echo &apos;KillMode=process&apos; &gt;&gt; /home/log-user/.config/systemd/log-user/hostname-date.service
-echo &apos;Restart=on-failure&apos; &gt;&gt; /home/log-user/.config/systemd/log-user/hostname-date.service
-echo &apos;RestartSec=30s&apos; &gt;&gt; /home/log-user/.config/systemd/log-user/hostname-date.service
-echo &apos;&apos; &gt;&gt; /home/log-user/.config/systemd/log-user/hostname-date.service
-echo &apos;[Install]&apos; &gt;&gt; /home/log-user/.config/systemd/log-user/hostname-date.service
-echo &apos;WantedBy=default.target&apos; &gt;&gt; /home/log-user/.config/systemd/log-user/hostname-date.service
+echo &apos;[Unit]&apos; &gt; /home/log-user/.config/systemd/user/hostname-date.service
+echo &apos;Description=Hostname-Date-Task&apos; &gt;&gt; /home/log-user/.config/systemd/user/hostname-date.service
+echo &apos;&apos; &gt;&gt; /home/log-user/.config/systemd/user/hostname-date.service
+echo &apos;[Service]&apos; &gt;&gt; /home/log-user/.config/systemd/user/hostname-date.service
+echo &apos;Type=notify&apos; &gt;&gt; /home/log-user/.config/systemd/user/hostname-date.service
+echo &apos;ExecStart=/home/log-user/jenkins-scripts/hostname-date.sh&apos; &gt;&gt; /home/log-user/.config/systemd/user/hostname-date.service
+echo &apos;KillMode=process&apos; &gt;&gt; /home/log-user/.config/systemd/user/hostname-date.service
+echo &apos;Restart=on-failure&apos; &gt;&gt; /home/log-user/.config/systemd/user/hostname-date.service
+echo &apos;RestartSec=30s&apos; &gt;&gt; /home/log-user/.config/systemd/user/hostname-date.service
+echo &apos;&apos; &gt;&gt; /home/log-user/.config/systemd/user/hostname-date.service
+echo &apos;[Install]&apos; &gt;&gt; /home/log-user/.config/systemd/user/hostname-date.service
+echo &apos;WantedBy=default.target&apos; &gt;&gt; /home/log-user/.config/systemd/user/hostname-date.service
 
-sudo systemctl --log-user start hostname-date.service
-sudo loginctl enable-linger log-user</command>
+sudo loginctl enable-linger log-user 2&gt;&gt; /tmp/jenkins-error || true
+
+#sudo su log-user 2&gt;&gt; /tmp/jenkins-error || true
+sudo systemctl --user start hostname-date.service 2&gt;&gt; /tmp/jenkins-error || true
+</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers/>
