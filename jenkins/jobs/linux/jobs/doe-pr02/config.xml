@@ -14,7 +14,7 @@
   <builders>
     <hudson.tasks.Shell>
       <command>echo &apos;while true; do&apos; &gt; /home/log-user/jenkins-scripts/hostname-date.sh
-echo &quot;  cat /etc/hostname | tr &apos;\n&apos; &apos; &apos;&gt; /tmp/hostname-date.txt;&quot; &gt; /home/log-user/jenkins-scripts/hostname-date.sh
+echo &quot;  cat /etc/hostname | tr &apos;\n&apos; &apos; &apos;&gt; /tmp/hostname-date.txt;&quot; &gt;&gt; /home/log-user/jenkins-scripts/hostname-date.sh
 echo &quot;  echo $(date +%d-%b-%Y_%Hh:%Mm:%Ss) &gt;&gt; /tmp/hostname-date.txt;&quot; &gt;&gt; /home/log-user/jenkins-scripts/hostname-date.sh
 echo &quot;sleep 60;&quot; &gt;&gt; /home/log-user/jenkins-scripts/hostname-date.sh
 echo &quot;done&quot; &gt;&gt; /home/log-user/jenkins-scripts/hostname-date.sh
