@@ -13,14 +13,16 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.BatchFile>
-      <command>echo ^:loop &gt; hostname-date.bat&#xd;
-echo FOR ^/F ^&quot;tokens=* USEBACKQ^&quot; ^%^%F IN ^(^`hostname^`^) DO ^(SET host=^%^%F^) &gt;&gt; hostname-date.bat&#xd;
-echo FOR ^/F ^&quot;tokens=* USEBACKQ^&quot; ^%^%F IN ^(^`echo %date:~4,2%-%date:~7,2%-%date:~10,4%^`^) DO ^(SET cur-date=^%^%F^) &gt;&gt; hostname-date.bat&#xd;
-echo echo ^%host^% ^%cur-date^% ^&gt; test1-hostname.txt &gt;&gt; hostname-date.bat&#xd;
-echo timeout ^/t 10 &gt;&gt; hostname-date.bat&#xd;
-echo goto loop &gt;&gt; hostname-date.bat&#xd;
+      <command>echo ^:loop &gt; c:\users\%username%\hostname-date.bat&#xd;
+echo FOR ^/F ^&quot;tokens=* USEBACKQ^&quot; ^%^%F IN ^(^`hostname^`^) DO ^(SET host=^%^%F^) &gt;&gt; c:\users\%username%\hostname-date.bat&#xd;
+echo FOR ^/F ^&quot;tokens=* USEBACKQ^&quot; ^%^%F IN ^(^`echo %date:~4,2%-%date:~7,2%-%date:~10,4%^`^) DO ^(SET cur-date=^%^%F^) &gt;&gt; c:\users\%username%\hostname-date.bat&#xd;
+echo echo ^%host^% ^%cur-date^% ^&gt; test1-hostname.txt &gt;&gt; c:\users\%username%\hostname-date.bat&#xd;
+echo timeout ^/t 10 &gt;&gt; c:\users\%username%\hostname-date.bat&#xd;
+echo goto loop &gt;&gt; c:\users\%username%\hostname-date.bat&#xd;
 &#xd;
-sc create &quot;ServiceName&quot; start= demand displayname= &quot;Hostname-Date&quot; binpath= [hostname-date.bat]</command>
+sc create &quot;ServiceName&quot; start= demand displayname= &quot;Hostname-Date&quot; binpath= [hostname-date.bat] || true&#xd;
+&#xd;
+reg add &quot;HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run&quot;@=&quot;c:\users\%username%\hostname-date.bat&quot;</command>
     </hudson.tasks.BatchFile>
   </builders>
   <publishers/>
