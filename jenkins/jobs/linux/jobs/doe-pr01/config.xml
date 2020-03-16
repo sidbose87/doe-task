@@ -13,20 +13,21 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command># Below commands are to prepare the system to execute the desired script and also to capture few details of server.
+      <command>echo &quot;# Below commands are to prepare the system to execute the desired script and also to capture few details of server &quot;
 
 cd /tmp
 ls -lah
 DIR=/tmp/doe-task						# This will be the working directory for the whole setup
-if [ -d &quot;$DIR&quot;]; then
+if [ -d &quot;$DIR&quot; ]; then
   echo &quot;repositry exist&quot;
 else
   git clone git@github.com:sidbose87/doe-task.git		# This step is clone the repo to working directory
+  cd $DIR
   git checkout master &amp;&amp; git pull
   echo &quot;repository created and checked out to latest&quot;
 fi
 
-# Below script os_details.sh is to capture few details about the operating system
+echo &quot;# Below script os_details.sh is to capture few details about the operating system.&quot;
 
 echo &apos;#!/bin/bash&apos; &gt; os_details.sh
 echo &apos;if [ -f /etc/os-release ]; then&apos; &gt;&gt; os_details.sh
@@ -73,14 +74,14 @@ chmod 755 os_details.sh
 
 cat /tmp/os_details.csv
 
-# Below commands needs to be executed with sudo permissions to create a named user, for script to run in next phase.
+echo &quot;# Below commands needs to be executed with sudo permissions to create a named user, for script to run in next phase.&quot;
 
 sudo useradd -m log-user
 sudo mkdir /home/log-user/jenkins-scripts
 sudo chmod -R o+rx /home/log-user/
 sudo chmod -R o+wx /home/log-user/jenkins-scripts/
 
-# Below command prepares for letting log-user run the next script as a service or daemon.
+echo &quot;# Below command prepares for letting log-user run the next script as a service or daemon.&quot;
 
 sudo mkdir -p /home/log-user/.config/systemd/log-user/
 sudo chmod -R o+rx /home/log-user/.config/systemd/
