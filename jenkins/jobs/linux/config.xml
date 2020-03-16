@@ -1,5 +1,6 @@
 <?xml version='1.1' encoding='UTF-8'?>
 <com.cloudbees.hudson.plugins.folder.Folder plugin="cloudbees-folder@6.10.1">
+  <actions/>
   <description></description>
   <properties>
     <org.jenkinsci.plugins.pipeline.modeldefinition.config.FolderConfig plugin="pipeline-model-definition@1.5.0">
@@ -16,6 +17,31 @@
         <filterQueue>false</filterQueue>
         <properties class="hudson.model.View$PropertyList"/>
       </hudson.model.AllView>
+      <au.com.centrumsystems.hudson.plugin.buildpipeline.BuildPipelineView plugin="build-pipeline-plugin@1.5.8">
+        <owner class="com.cloudbees.hudson.plugins.folder.Folder" reference="../../../.."/>
+        <name>Linux-Pipeline</name>
+        <description>Linux-Pipeline</description>
+        <filterExecutors>false</filterExecutors>
+        <filterQueue>false</filterQueue>
+        <properties class="hudson.model.View$PropertyList"/>
+        <gridBuilder class="au.com.centrumsystems.hudson.plugin.buildpipeline.DownstreamProjectGridBuilder">
+          <firstJob>doe-pr01</firstJob>
+        </gridBuilder>
+        <noOfDisplayedBuilds>5</noOfDisplayedBuilds>
+        <buildViewTitle>Linux-Pipeline</buildViewTitle>
+        <consoleOutputLinkStyle>Lightbox</consoleOutputLinkStyle>
+        <cssUrl></cssUrl>
+        <triggerOnlyLatestJob>false</triggerOnlyLatestJob>
+        <alwaysAllowManualTrigger>false</alwaysAllowManualTrigger>
+        <showPipelineParameters>false</showPipelineParameters>
+        <rowHeaders class="au.com.centrumsystems.hudson.plugin.buildpipeline.extension.SimpleRowHeader"/>
+        <showPipelineParametersInHeaders>false</showPipelineParametersInHeaders>
+        <columnHeaders class="au.com.centrumsystems.hudson.plugin.buildpipeline.extension.NullColumnHeader"/>
+        <buildCard class="au.com.centrumsystems.hudson.plugin.buildpipeline.extension.StandardBuildCard"/>
+        <startsWithParameters>false</startsWithParameters>
+        <refreshFrequency>3</refreshFrequency>
+        <showPipelineDefinitionHeader>false</showPipelineDefinitionHeader>
+      </au.com.centrumsystems.hudson.plugin.buildpipeline.BuildPipelineView>
     </views>
     <tabBar class="hudson.views.DefaultViewsTabBar"/>
   </folderViews>

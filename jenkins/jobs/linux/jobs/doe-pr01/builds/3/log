@@ -1,0 +1,93 @@
+Started by user [8mha:////4JSZcmKVxxy2+2NrwAb+lj1ReIAOzPEU2wPXAFS4wwNiAAAAlR+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAz+EgZO/dLi1CL94swUAO1XDqK+AAAA[0mSiddhartha Bose
+Running as SYSTEM
+Building in workspace /var/lib/jenkins/workspace/linux/doe-pr01
+No credentials specified
+ > git rev-parse --is-inside-work-tree # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url git@github.com:sidbose87/doe-task.git # timeout=10
+Fetching upstream changes from git@github.com:sidbose87/doe-task.git
+ > git --version # timeout=10
+ > git fetch --tags --force --progress -- git@github.com:sidbose87/doe-task.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+ > git rev-parse refs/remotes/origin/origin/master^{commit} # timeout=10
+Checking out Revision 867fa4510e9701dbc6d345043f13241920c8eed4 (refs/remotes/origin/master)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 867fa4510e9701dbc6d345043f13241920c8eed4 # timeout=10
+Commit message: "sid. update 2"
+ > git rev-list --no-walk ddb82152819959692332db12e899a0a88bff8f9a # timeout=10
+[doe-pr01] $ /bin/sh -xe /tmp/jenkins9602496672165347550.sh
++ cd /tmp
++ ls -lah
+total 2.4M
+drwxrwxrwt 19 root    root    4.0K Mar 16 11:10 .
+drwxr-xr-x 20 root    root    4.0K Mar 15 05:31 ..
+-rw-------  1 osboxes osboxes    0 Mar 16 09:19 config-err-hsYGIr
+drwxrwxrwt  2 root    root    4.0K Mar 16 09:18 .font-unix
+drwxr-xr-x  2 jenkins jenkins 4.0K Mar 16 09:19 hsperfdata_jenkins
+drwxr-xr-x  2 root    root    4.0K Mar 16 09:19 hsperfdata_root
+drwxrwxrwt  2 root    root    4.0K Mar 16 09:19 .ICE-unix
+-rw-r--r--  1 jenkins jenkins 2.7K Mar 16 11:10 jenkins9602496672165347550.sh
+drwxr-xr-x  2 jenkins jenkins 4.0K Mar 16 09:19 jetty-0.0.0.0-8080-war-_-any-3411886454956775948.dir
+drwx------  2 osboxes osboxes 4.0K Mar 16 09:19 ssh-M3Vm1fXk4jKM
+drwx------  3 root    root    4.0K Mar 16 09:21 systemd-private-c75ce2ca47254bc9923c9a6303c95111-bolt.service-wCFEzQ
+drwx------  3 root    root    4.0K Mar 16 09:19 systemd-private-c75ce2ca47254bc9923c9a6303c95111-colord.service-bl6EUu
+drwx------  3 root    root    4.0K Mar 16 09:21 systemd-private-c75ce2ca47254bc9923c9a6303c95111-fwupd.service-SBGwwL
+drwx------  3 root    root    4.0K Mar 16 09:18 systemd-private-c75ce2ca47254bc9923c9a6303c95111-ModemManager.service-HacurG
+drwx------  3 root    root    4.0K Mar 16 09:18 systemd-private-c75ce2ca47254bc9923c9a6303c95111-systemd-resolved.service-m74CzN
+drwx------  3 root    root    4.0K Mar 16 09:18 systemd-private-c75ce2ca47254bc9923c9a6303c95111-systemd-timesyncd.service-8yEvOu
+drwx------  3 root    root    4.0K Mar 16 09:19 systemd-private-c75ce2ca47254bc9923c9a6303c95111-upower.service-12WHLI
+drwxrwxrwt  2 root    root    4.0K Mar 16 09:18 .Test-unix
+drwx------  2 osboxes osboxes 4.0K Mar 16 09:20 tracker-extract-files.1000
+-rw-r--r--  1 jenkins jenkins 2.3M Mar 16 09:19 winstone7640931040698918057.jar
+-r--r--r--  1 gdm     gdm       11 Mar 16 09:19 .X1024-lock
+drwxrwxrwt  2 root    root    4.0K Mar 16 09:19 .X11-unix
+drwxrwxrwt  2 root    root    4.0K Mar 16 09:18 .XIM-unix
++ DIR=/tmp/doe-task
++ [ -d /tmp/doe-task]
+/tmp/jenkins9602496672165347550.sh: 7: [: missing ]
++ git clone git@github.com:sidbose87/doe-task.git
+Cloning into 'doe-task'...
++ git checkout master
+fatal: not a git repository (or any of the parent directories): .git
++ echo repository created and checked out to latest
+repository created and checked out to latest
++ echo #!/bin/bash
++ echo if [ -f /etc/os-release ]; then
++ echo     . /etc/os-release
++ echo     OS=$NAME
++ echo     VER=$VERSION_ID
++ echo elif type lsb_release >/dev/null 2>&1; then
++ echo     OS=$(lsb_release -si)
++ echo     VER=$(lsb_release -sr)
++ echo elif [ -f /etc/lsb-release ]; then
++ echo     . /etc/lsb-release
++ echo     OS=$DISTRIB_ID
++ echo     VER=$DISTRIB_RELEASE
++ echo elif [ -f /etc/debian_version ]; then
++ echo     OS=Debian
++ echo     VER=$(cat /etc/debian_version)
++ echo elif [ -f /etc/redhat-release ]; then
++ echo     OS=RedHat
++ echo     VER=$(cat /etc/redhat-release)
++ echo else
++ echo     # For all other versions
++ echo     OS=$(uname -s)
++ echo     VER=$(uname -r)
++ echo fi
++ echo case $(uname -m) in
++ echo x86_64)
++ echo     BITS=64
++ echo     ;;
++ echo i*86)
++ echo     BITS=32
++ echo     ;;
++ echo *)
++ echo     BITS=?
++ echo     ;;
++ echo esac
++ echo echo "OS, VERSION, BIT-VERSION" > /tmp/os_details.csv
++ echo echo "$OS, $VER, $BITS" >> /tmp/os_details.csv
++ ./os_details.sh
+/tmp/jenkins9602496672165347550.sh: 56: /tmp/jenkins9602496672165347550.sh: ./os_details.sh: Permission denied
+Build step 'Execute shell' marked build as failure
+Finished: FAILURE

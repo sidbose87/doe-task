@@ -4,22 +4,7 @@
   <description></description>
   <keepDependencies>false</keepDependencies>
   <properties/>
-  <scm class="hudson.plugins.git.GitSCM" plugin="git@4.0.0">
-    <configVersion>2</configVersion>
-    <userRemoteConfigs>
-      <hudson.plugins.git.UserRemoteConfig>
-        <url>git@github.com:sidbose87/doe-task.git</url>
-      </hudson.plugins.git.UserRemoteConfig>
-    </userRemoteConfigs>
-    <branches>
-      <hudson.plugins.git.BranchSpec>
-        <name>*/master</name>
-      </hudson.plugins.git.BranchSpec>
-    </branches>
-    <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
-    <submoduleCfg class="list"/>
-    <extensions/>
-  </scm>
+  <scm class="hudson.scm.NullSCM"/>
   <canRoam>true</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
@@ -28,60 +13,78 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>cd /tmp
+      <command># Below commands are to prepare the system to execute the desired script and also to capture few details of server.
+
+cd /tmp
 ls -lah
-DIR=/tmp/doe-task
+DIR=/tmp/doe-task						# This will be the working directory for the whole setup
 if [ -d &quot;$DIR&quot;]; then
   echo &quot;repositry exist&quot;
- else
-  git clone git@github.com:sidbose87/doe-task.git
+else
+  git clone git@github.com:sidbose87/doe-task.git		# This step is clone the repo to working directory
   git checkout master &amp;&amp; git pull
   echo &quot;repository created and checked out to latest&quot;
 fi
 
+# Below script os_details.sh is to capture few details about the operating system
 
-echo &apos;#!/bin/bash&apos; &gt; trigger_prereq.sh
-echo &apos;if [ -f /etc/os-release ]; then&apos; &gt;&gt; trigger_prereq.sh
-echo &apos;    . /etc/os-release&apos; &gt;&gt; trigger_prereq.sh
-echo &apos;    OS=$NAME&apos; &gt;&gt; trigger_prereq.sh
-echo &apos;    VER=$VERSION_ID&apos; &gt;&gt; trigger_prereq.sh
-echo &apos;elif type lsb_release &gt;/dev/null 2&gt;&amp;1; then&apos; &gt;&gt; trigger_prereq.sh
-echo &apos;    OS=$(lsb_release -si)&apos; &gt;&gt; trigger_prereq.sh
-echo &apos;    VER=$(lsb_release -sr)&apos; &gt;&gt; trigger_prereq.sh
-echo &apos;elif [ -f /etc/lsb-release ]; then&apos; &gt;&gt; trigger_prereq.sh
-echo &apos;    . /etc/lsb-release&apos; &gt;&gt; trigger_prereq.sh
-echo &apos;    OS=$DISTRIB_ID&apos; &gt;&gt; trigger_prereq.sh
-echo &apos;    VER=$DISTRIB_RELEASE&apos; &gt;&gt; trigger_prereq.sh
-echo &apos;elif [ -f /etc/debian_version ]; then&apos; &gt;&gt; trigger_prereq.sh
-echo &apos;    OS=Debian&apos; &gt;&gt; trigger_prereq.sh
-echo &apos;    VER=$(cat /etc/debian_version)&apos; &gt;&gt; trigger_prereq.sh
-echo &apos;elif [ -f /etc/redhat-release ]; then&apos; &gt;&gt; trigger_prereq.sh
-echo &apos;    OS=RedHat&apos; &gt;&gt; trigger_prereq.sh
-echo &apos;    VER=$(cat /etc/redhat-release)&apos; &gt;&gt; trigger_prereq.sh
-echo &apos;else&apos; &gt;&gt; trigger_prereq.sh
-echo &apos;    # For all other versions&apos; &gt;&gt; trigger_prereq.sh
-echo &apos;    OS=$(uname -s)&apos; &gt;&gt; trigger_prereq.sh
-echo &apos;    VER=$(uname -r)&apos; &gt;&gt; trigger_prereq.sh
-echo &apos;fi&apos; &gt;&gt; trigger_prereq.sh
+echo &apos;#!/bin/bash&apos; &gt; os_details.sh
+echo &apos;if [ -f /etc/os-release ]; then&apos; &gt;&gt; os_details.sh
+echo &apos;    . /etc/os-release&apos; &gt;&gt; os_details.sh
+echo &apos;    OS=$NAME&apos; &gt;&gt; os_details.sh
+echo &apos;    VER=$VERSION_ID&apos; &gt;&gt; os_details.sh
+echo &apos;elif type lsb_release &gt;/dev/null 2&gt;&amp;1; then&apos; &gt;&gt; os_details.sh
+echo &apos;    OS=$(lsb_release -si)&apos; &gt;&gt; os_details.sh
+echo &apos;    VER=$(lsb_release -sr)&apos; &gt;&gt; os_details.sh
+echo &apos;elif [ -f /etc/lsb-release ]; then&apos; &gt;&gt; os_details.sh
+echo &apos;    . /etc/lsb-release&apos; &gt;&gt; os_details.sh
+echo &apos;    OS=$DISTRIB_ID&apos; &gt;&gt; os_details.sh
+echo &apos;    VER=$DISTRIB_RELEASE&apos; &gt;&gt; os_details.sh
+echo &apos;elif [ -f /etc/debian_version ]; then&apos; &gt;&gt; os_details.sh
+echo &apos;    OS=Debian&apos; &gt;&gt; os_details.sh
+echo &apos;    VER=$(cat /etc/debian_version)&apos; &gt;&gt; os_details.sh
+echo &apos;elif [ -f /etc/redhat-release ]; then&apos; &gt;&gt; os_details.sh
+echo &apos;    OS=RedHat&apos; &gt;&gt; os_details.sh
+echo &apos;    VER=$(cat /etc/redhat-release)&apos; &gt;&gt; os_details.sh
+echo &apos;else&apos; &gt;&gt; os_details.sh
+echo &apos;    # For all other versions&apos; &gt;&gt; os_details.sh
+echo &apos;    OS=$(uname -s)&apos; &gt;&gt; os_details.sh
+echo &apos;    VER=$(uname -r)&apos; &gt;&gt; os_details.sh
+echo &apos;fi&apos; &gt;&gt; os_details.sh
 
-echo &apos;case $(uname -m) in&apos; &gt;&gt; trigger_prereq.sh
-echo &apos;x86_64)&apos; &gt;&gt; trigger_prereq.sh
-echo &apos;    BITS=64&apos; &gt;&gt; trigger_prereq.sh
-echo &apos;    ;;&apos; &gt;&gt; trigger_prereq.sh
-echo &apos;i*86)&apos; &gt;&gt; trigger_prereq.sh
-echo &apos;    BITS=32&apos; &gt;&gt; trigger_prereq.sh
-echo &apos;    ;;&apos; &gt;&gt; trigger_prereq.sh
-echo &apos;*)&apos; &gt;&gt; trigger_prereq.sh
-echo &apos;    BITS=?&apos; &gt;&gt; trigger_prereq.sh
-echo &apos;    ;;&apos; &gt;&gt; trigger_prereq.sh
-echo &apos;esac&apos; &gt;&gt; trigger_prereq.sh
+echo &apos;case $(uname -m) in&apos; &gt;&gt; os_details.sh
+echo &apos;x86_64)&apos; &gt;&gt; os_details.sh
+echo &apos;    BITS=64&apos; &gt;&gt; os_details.sh
+echo &apos;    ;;&apos; &gt;&gt; os_details.sh
+echo &apos;i*86)&apos; &gt;&gt; os_details.sh
+echo &apos;    BITS=32&apos; &gt;&gt; os_details.sh
+echo &apos;    ;;&apos; &gt;&gt; os_details.sh
+echo &apos;*)&apos; &gt;&gt; os_details.sh
+echo &apos;    BITS=?&apos; &gt;&gt; os_details.sh
+echo &apos;    ;;&apos; &gt;&gt; os_details.sh
+echo &apos;esac&apos; &gt;&gt; os_details.sh
 
-echo &apos;echo &quot;OS, VERSION, BIT-VERSION&quot; &gt; /tmp/details.csv&apos; &gt;&gt; trigger_prereq.sh
-echo &apos;echo &quot;$OS, $VER, $BITS&quot; &gt;&gt; /tmp/details.csv&apos; &gt;&gt; trigger_prereq.sh
+echo &apos;echo &quot;OS, VERSION, BIT-VERSION&quot; &gt; /tmp/os_details.csv&apos; &gt;&gt; os_details.sh
+echo &apos;echo &quot;$OS, $VER, $BITS&quot; &gt;&gt; /tmp/os_details.csv&apos; &gt;&gt; os_details.sh
 
-./trigger_prereq.sh
+chmod 755 os_details.sh
 
-cat /tmp/details.csv
+./os_details.sh
+
+cat /tmp/os_details.csv
+
+# Below commands needs to be executed with sudo permissions to create a named user, for script to run in next phase.
+
+sudo useradd -m log-user
+sudo mkdir /home/log-user/jenkins-scripts
+sudo chmod -R o+rx /home/log-user/
+sudo chmod -R o+wx /home/log-user/jenkins-scripts/
+
+# Below command prepares for letting log-user run the next script as a service or daemon.
+
+sudo mkdir -p /home/log-user/.config/systemd/log-user/
+sudo chmod -R o+rx /home/log-user/.config/systemd/
+sudo chmod -R o+wx /home/log-user/.config/systemd/log-user/
 </command>
     </hudson.tasks.Shell>
   </builders>
