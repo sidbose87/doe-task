@@ -8,7 +8,11 @@ These instructions will get you a copy of the project up and running on your loc
 
 ## Prerequisites
 
-You need to copy the contents of .ssh folder of pre-req in order for your local jenkins master to have access to repo with the provided ssh keys.
+You need to copy the contents of .ssh folder of pre-req in order for your local jenkins master to have access to repo with the provided ssh keys. 
+
+## Assumptions
+
+Jenkins is installed with sudo access to run some system related commands for linux
 
 ## Instructions
 
@@ -17,6 +21,10 @@ Copy contents of jenkins/jobs folder to your local jenkins master.
 Or use
 1. Configurator.bat (For windows to set up your environment by moving files from this repo)
 2. Configurator.sh (For linux to set up your environment by moving files from this repo)
+
+## Examples
+
+Just open jenkins console and run the build job for Linux doe-pr01, similarly for windows
 
 ## Deployment
 
