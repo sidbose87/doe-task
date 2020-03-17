@@ -81,11 +81,11 @@ sudo mkdir /home/log-user/jenkins-scripts 2&gt;&gt;/tmp/jenkins-error || true
 sudo chmod -R o+rx /home/log-user/ 2&gt;&gt;/tmp/jenkins-error || true
 sudo chmod -R o+wx /home/log-user/jenkins-scripts/ 2&gt;&gt;/tmp/jenkins-error || true
 
-echo &quot;# Below command prepares for letting log-user run the next script as a service or daemon.&quot;
+#echo &quot;# Below command prepares for letting log-user run the next script as a service or daemon.&quot;
 
-sudo mkdir -p /home/log-user/.config/systemd/user/ 2&gt;&gt;/tmp/jenkins-error || true
-sudo chmod -R o+rx /home/log-user/.config/systemd/ 2&gt;&gt;/tmp/jenkins-error || true
-sudo chmod -R o+wx /home/log-user/.config/systemd/user/ 2&gt;&gt;/tmp/jenkins-error || true
+#sudo mkdir -p /home/log-user/.config/systemd/user/ 2&gt;&gt;/tmp/jenkins-error || true
+#sudo chmod -R o+rx /home/log-user/.config/systemd/ 2&gt;&gt;/tmp/jenkins-error || true
+#sudo chmod -R o+wx /home/log-user/.config/systemd/user/ 2&gt;&gt;/tmp/jenkins-error || true
 </command>
     </hudson.tasks.Shell>
   </builders>
